@@ -1,0 +1,68 @@
+<div style="font-size: 18px;">
+    <span style="font-weight: bold;"><%= sender %></span> to <span style="font-weight: bold;"><%= receiver %></span>
+</div>
+<div id="frst">
+<% if(typeof data.message !== 'undefined' && data.message.length > 0) {%>
+<% data.message.forEach((msg)=>{%>
+    <%if((msg.sender === sender && msg.receiver === receiver) || (msg.sender === receiver && msg.receiver === sender)) {%>
+        <%if(msg.msg != null && msg.msg !== ''){%>
+        <div>
+            <span><%= msg.sender %> : <%= msg.msg %></span>
+        </div>
+        <%}%>
+        <% if(msg.image != null){%>
+          <%if(msg.image.split(".")[1]=== 'pdf') {%>
+          <div>
+            <embed height="100px" width="150px" src="<%= msg.image %>">
+          </div>
+          <%} else{%>
+            <div>
+                <img height="100px" width="150px" src="<%= msg.image %>">
+              </div>
+          <%}%>
+        <%}%>
+    <%}%>
+<%})%>
+<%} else{%>
+    <br>
+    No message yet
+<%}%>
+</div>
+
+<form id="myform" action="sendmessage" method="POST" enctype="multipart/form-data">
+    <input type="hidden" name="sender" value="<%= sender %>">
+    <input type="hidden" name="receiver" value="<%= receiver %>">
+    <input type="text" name="msg" >
+    <input type="file" name="image">
+    <input type="submit" name="submit" value="send">
+</form>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
+
+<script>
+    // if ( window.history.replaceState ) {
+    //     window.history.replaceState( null, null, window.location.href );
+    // }
+
+    // function submitForm(){
+    //     var frm = document.getElementById("myform");
+    //     //frm.submit();
+    //     frm.reset();
+    //     //return false;
+    // }
+
+    // var frm = document.getElementById('myform');
+    // frm.addEventListener('submit',function submitform(event){
+    //       event.preventDefault();
+    //       frm.reset();
+    // })
+
+    // setTimeout(function(){
+    //     // var part = document.getElementById('frst');
+    //     // part.reaload(1);
+    //     window.location.reload(1);
+    // },2000)
+
+   //location.replace('message');
+
+</script>

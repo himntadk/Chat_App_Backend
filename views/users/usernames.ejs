@@ -1,0 +1,7 @@
+<% data.forEach((data)=>{%>
+    <br>
+    <div>
+    <span><%=data.name%></data.name></span>
+    <a href="message?sender=<%= sender%>&receiver=<%= data.name%>"><button>chat</button></a>
+    </div>
+<%})%>
